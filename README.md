@@ -1,8 +1,29 @@
-# TypeScript Complete Sapphire Bot example
+# Verdie Repository Guidelines
 
-This is a more complete setup of a Discord bot using the [sapphire framework][sapphire] written in TypeScript.
+> [!WARNING]
+> This project is currently in active development, and it is not recommended to use it in its current form. No support will be provided for unofficial versions until a "Release" version is published.
 
-It is similar to the [starter setup](../with-typescript-starter/), but adds more data structures and a more complete setup.
+> [!NOTE]
+> The complete documentation and additional details will be available in this README.md once the first official version has been released. Thank you for your understanding and interest in Verdie!
+
+## Commit Messages
+
+Use clear and descriptive commit messages with the following prefixes:
+
+-   `feat`: Introducing a new feature
+-   `fix`: Fixing a bug
+-   `docs`: Changes to documentation
+-   `style`: Code style changes (formatting, indentation)
+-   `refactor`: Code restructuring without changing functionality
+-   `perf`: Performance improvements
+-   `test`: Adding or updating tests
+-   `chore`: Miscellaneous tasks (updating build tasks, package manager configs)
+
+**Example**:
+
+```
+feat: add ban command to moderation module
+```
 
 ## How to use it?
 
@@ -23,10 +44,3 @@ npm run watch:start
 ### Production
 
 You can also run the bot with `npm dev`, this will first build your code and then run `node ./dist/index.js`. But this is not the recommended way to run a bot in production.
-
-## License
-
-Dedicated to the public domain via the [Unlicense], courtesy of the Sapphire Community and its contributors.
-
-[sapphire]: https://github.com/sapphiredev/framework
-[unlicense]: https://github.com/sapphiredev/examples/blob/main/LICENSE.md
