@@ -29,6 +29,14 @@ const client = new SapphireClient({
 	hmr: {
 		enabled: process.env.NODE_ENV === 'development'
 	},
+	tasks: {
+		bull: {
+			connection: {
+				port: 6379,
+				host: 'localhost'
+			}
+		}
+	},
 	i18n: {
 		fetchLanguage: async (context: InternationalizationContext) => {
 			if (context.interactionGuildLocale || context.interactionLocale) {

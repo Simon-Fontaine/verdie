@@ -1,0 +1,13 @@
+services:
+  redis:
+    image: redis
+    container_name: my-redis-container
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+    command: ['redis-server', '--protected-mode', 'no']
+
+volumes:
+  redis-data:
+    driver: local
