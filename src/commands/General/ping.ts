@@ -1,6 +1,7 @@
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
+import { resolveKey } from '@sapphire/plugin-i18next';
 import { ApplicationCommandType, type Message } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
@@ -35,9 +36,7 @@ export class UserCommand extends Command {
 		const diff = (msg.editedTimestamp || msg.createdTimestamp) - (message.editedTimestamp || message.createdTimestamp);
 		const ping = Math.round(this.container.client.ws.ping);
 
-		const content = `Pong 🏓! (Round trip took: ${diff}ms. Heartbeat: ${ping}ms.)`;
-
-		return send(message, content);
+		return send(message, await resolveKey(message, 'ping:success', { diff, ping }));
 	}
 
 	// slash command
@@ -47,9 +46,7 @@ export class UserCommand extends Command {
 		const diff = msg.createdTimestamp - interaction.createdTimestamp;
 		const ping = Math.round(this.container.client.ws.ping);
 
-		const content = `Pong 🏓! (Round trip took: ${diff}ms. Heartbeat: ${ping}ms.)`;
-
-		return interaction.editReply({ content });
+		return interaction.editReply({ content: await resolveKey(interaction, 'ping:success', { diff, ping }) });
 	}
 
 	// context menu command
@@ -59,8 +56,6 @@ export class UserCommand extends Command {
 		const diff = msg.createdTimestamp - interaction.createdTimestamp;
 		const ping = Math.round(this.container.client.ws.ping);
 
-		const content = `Pong 🏓! (Round trip took: ${diff}ms. Heartbeat: ${ping}ms.)`;
-
-		return interaction.editReply({ content });
+		return interaction.editReply({ content: await resolveKey(interaction, 'ping:success', { diff, ping }) });
 	}
 }

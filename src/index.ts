@@ -2,6 +2,7 @@ import './lib/setup';
 
 import { LogLevel, SapphireClient } from '@sapphire/framework';
 import { GatewayIntentBits, Partials } from 'discord.js';
+import type { InternationalizationContext } from '@sapphire/plugin-i18next';
 
 const client = new SapphireClient({
 	defaultPrefix: '!',
@@ -24,7 +25,23 @@ const client = new SapphireClient({
 		GatewayIntentBits.MessageContent
 	],
 	partials: [Partials.Channel],
-	loadMessageCommandListeners: true
+	loadMessageCommandListeners: true,
+	i18n: {
+		fetchLanguage: async (context: InternationalizationContext) => {
+			if (context.interactionGuildLocale || context.interactionLocale) {
+				return context.interactionGuildLocale || context.interactionLocale || null;
+			}
+
+			if (!context.guild) {
+				return 'en-US';
+			}
+
+			// TODO: implement db
+			// const guildSettings = await db.find({ guild_id: context.guildId });
+			// return guildSettings.language;
+			return 'en-US';
+		}
+	}
 });
 
 const main = async () => {
