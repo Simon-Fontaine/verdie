@@ -5,7 +5,7 @@ import { resolveKey } from '@sapphire/plugin-i18next';
 import { ApplicationCommandType, type Message } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
-	description: 'ping pong'
+	description: "Gives information about Verdie's ping."
 })
 export class UserCommand extends Command {
 	// Register slash and context menu command
