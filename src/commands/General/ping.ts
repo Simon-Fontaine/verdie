@@ -32,9 +32,10 @@ export class UserCommand extends Command {
 	public override async messageRun(message: Message) {
 		const msg = await send(message, 'Ping?');
 
-		const content = `Pong! Bot Latency ${Math.round(this.container.client.ws.ping)}ms. API Latency ${
-			(msg.editedTimestamp || msg.createdTimestamp) - (message.editedTimestamp || message.createdTimestamp)
-		}ms.`;
+		const diff = (msg.editedTimestamp || msg.createdTimestamp) - (message.editedTimestamp || message.createdTimestamp);
+		const ping = Math.round(this.container.client.ws.ping);
+
+		const content = `Pong 🏓! (Round trip took: ${diff}ms. Heartbeat: ${ping}ms.)`;
 
 		return send(message, content);
 	}
@@ -43,9 +44,10 @@ export class UserCommand extends Command {
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
 		const msg = await interaction.reply({ content: 'Ping?', fetchReply: true });
 
-		const content = `Pong! Bot Latency ${Math.round(this.container.client.ws.ping)}ms. API Latency ${
-			msg.createdTimestamp - interaction.createdTimestamp
-		}ms.`;
+		const diff = msg.createdTimestamp - interaction.createdTimestamp;
+		const ping = Math.round(this.container.client.ws.ping);
+
+		const content = `Pong 🏓! (Round trip took: ${diff}ms. Heartbeat: ${ping}ms.)`;
 
 		return interaction.editReply({ content });
 	}
@@ -54,9 +56,10 @@ export class UserCommand extends Command {
 	public override async contextMenuRun(interaction: Command.ContextMenuCommandInteraction) {
 		const msg = await interaction.reply({ content: 'Ping?', fetchReply: true });
 
-		const content = `Pong! Bot Latency ${Math.round(this.container.client.ws.ping)}ms. API Latency ${
-			msg.createdTimestamp - interaction.createdTimestamp
-		}ms.`;
+		const diff = msg.createdTimestamp - interaction.createdTimestamp;
+		const ping = Math.round(this.container.client.ws.ping);
+
+		const content = `Pong 🏓! (Round trip took: ${diff}ms. Heartbeat: ${ping}ms.)`;
 
 		return interaction.editReply({ content });
 	}
