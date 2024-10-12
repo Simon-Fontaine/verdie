@@ -20,8 +20,29 @@ services:
       - redis-data:/data
     command: ['redis-server', '--protected-mode', 'no']
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - '8080:80'
+    depends_on:
+      - postgres
+
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redisinsight-container
+    ports:
+      - '5540:5540'
+    volumes:
+      - redisinsight-data:/data
+
 volumes:
   postgres-data:
     driver: local
   redis-data:
+    driver: local
+  redisinsight-data:
     driver: local
