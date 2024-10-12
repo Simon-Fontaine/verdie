@@ -11,6 +11,11 @@ const client = new SapphireClient({
 	logger: {
 		level: LogLevel.Debug
 	},
+	api: {
+		listenOptions: {
+			port: 3000
+		}
+	},
 	shards: 'auto',
 	intents: [
 		GatewayIntentBits.DirectMessageReactions,
