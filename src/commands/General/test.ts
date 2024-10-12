@@ -15,6 +15,9 @@ export class UserCommand extends Command {
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
 		this.container.tasks.create({ name: 'testing', payload: { data: interaction.user.id } }, 10_000);
 
-		return interaction.reply({ content: 'test' });
+		const allUsers = await this.container.prisma.user.findMany();
+		console.log(allUsers);
+
+		return interaction.reply({ content: 'testing :)', ephemeral: true });
 	}
 }
