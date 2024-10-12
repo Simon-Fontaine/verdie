@@ -14,6 +14,8 @@ import * as colorette from 'colorette';
 import { join } from 'path';
 import { inspect } from 'util';
 import { srcDir } from './constants';
+import { PrismaClient } from '@prisma/client';
+import { container } from '@sapphire/framework';
 
 // Set default behavior to bulk overwrite
 ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.BulkOverwrite);
@@ -30,5 +32,13 @@ colorette.createColors({ useColor: true });
 declare module '@skyra/env-utilities' {
 	interface Env {
 		OWNERS: ArrayString;
+	}
+}
+
+container.prisma = new PrismaClient();
+
+declare module '@sapphire/pieces' {
+	interface Container {
+		prisma: PrismaClient;
 	}
 }

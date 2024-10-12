@@ -1,6 +1,6 @@
 import './lib/setup';
 
-import { LogLevel, SapphireClient } from '@sapphire/framework';
+import { container, LogLevel, SapphireClient } from '@sapphire/framework';
 import { GatewayIntentBits, Partials } from 'discord.js';
 import type { InternationalizationContext } from '@sapphire/plugin-i18next';
 
@@ -62,9 +62,13 @@ const client = new SapphireClient({
 
 const main = async () => {
 	try {
+		client.logger.info('Connecting to the database');
+		await container.prisma.$connect();
+		client.logger.info('Connected to the database');
+
 		client.logger.info('Logging in');
 		await client.login();
-		client.logger.info('logged in');
+		client.logger.info('Logged in');
 	} catch (error) {
 		client.logger.fatal(error);
 		await client.destroy();
