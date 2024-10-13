@@ -28,7 +28,7 @@ async function fetchLanguage(context: InternationalizationContext) {
 		return 'en-US';
 	}
 
-	const guildSettings = await container.prisma.guild.findUnique({
+	const guildSettings = await container.prisma.guild.findFirst({
 		where: {
 			id: context.guild.id
 		}
