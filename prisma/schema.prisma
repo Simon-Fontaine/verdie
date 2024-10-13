@@ -13,6 +13,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Guild {
+    id                  String     @id @db.VarChar(19)
+    timezone            String     @default("UTC")
+    language            String     @default("en-US") @db.VarChar(5)
+    createdAt           DateTime   @default(now()) @map("created_at")
+    updatedAt           DateTime   @updatedAt @map("updated_at")
+
+    @@index([id])
+    @@map("guild")
+}
+
 model User {
     id            String     @id @db.VarChar(19)
     username      String?    @db.VarChar(19)

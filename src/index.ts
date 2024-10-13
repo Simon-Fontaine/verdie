@@ -1,80 +1,25 @@
-import './lib/setup';
+// import './lib/setup';
+import '#lib/setup';
 
-import { container, LogLevel, SapphireClient } from '@sapphire/framework';
-import { GatewayIntentBits, Partials } from 'discord.js';
-import type { InternationalizationContext } from '@sapphire/plugin-i18next';
+import { container } from '@sapphire/framework';
+import { VerdieClient } from './lib/VerdieClient';
 
-const client = new SapphireClient({
-	defaultPrefix: '!',
-	regexPrefix: /^(hey +)?bot[,! ]/i,
-	caseInsensitiveCommands: true,
-	logger: {
-		level: LogLevel.Debug
-	},
-	api: {
-		listenOptions: {
-			port: 3000
-		}
-	},
-	shards: 'auto',
-	intents: [
-		GatewayIntentBits.DirectMessageReactions,
-		GatewayIntentBits.DirectMessages,
-		GatewayIntentBits.GuildModeration,
-		GatewayIntentBits.GuildEmojisAndStickers,
-		GatewayIntentBits.GuildMembers,
-		GatewayIntentBits.GuildMessageReactions,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildVoiceStates,
-		GatewayIntentBits.MessageContent
-	],
-	partials: [Partials.Channel],
-	loadMessageCommandListeners: true,
-	hmr: {
-		enabled: process.env.NODE_ENV === 'development'
-	},
-	tasks: {
-		bull: {
-			connection: {
-				port: 6379,
-				host: 'localhost'
-			}
-		}
-	},
-	i18n: {
-		fetchLanguage: async (context: InternationalizationContext) => {
-			if (context.interactionGuildLocale || context.interactionLocale) {
-				return context.interactionGuildLocale || context.interactionLocale || null;
-			}
-
-			if (!context.guild) {
-				return 'en-US';
-			}
-
-			// TODO: implement db
-			// const guildSettings = await db.find({ guild_id: context.guildId });
-			// return guildSettings.language;
-			return 'en-US';
-		}
-	}
-});
+const client = new VerdieClient();
 
 const main = async () => {
 	try {
-		client.logger.info('Connecting to the database');
+		container.logger.info('Connecting to the database...');
 		await container.prisma.$connect();
-		client.logger.info('Connected to the database');
+		container.logger.info('Connected to the database.');
 
-		client.logger.info('Logging in');
+		container.logger.info('Logging in to Discord...');
 		await client.login();
-		client.logger.info('Logged in');
+		container.logger.info('Logged in to Discord.');
 	} catch (error) {
-		client.logger.fatal(error);
+		client.logger.error(error);
 		await client.destroy();
-		await container.prisma.$disconnect();
 		process.exit(1);
 	}
 };
 
-void main();
+main().catch(container.logger.error.bind(container.logger));

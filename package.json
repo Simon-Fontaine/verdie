@@ -5,6 +5,12 @@
 	"author": "@sapphire",
 	"license": "UNLICENSE",
 	"type": "commonjs",
+	"imports": {
+		"#root/*": "./dist/*.js",
+		"#lib/*": "./dist/lib/*.js",
+		"#utils/*": "./dist/lib/util/*.js",
+		"#lib/setup": "./dist/lib/setup/index.js"
+	},
 	"dependencies": {
 		"@prisma/client": "^5.20.0",
 		"@sapphire/decorators": "^6.0.4",
@@ -14,7 +20,6 @@
 		"@sapphire/framework": "^5.0.7",
 		"@sapphire/plugin-api": "^6.1.1",
 		"@sapphire/plugin-editable-commands": "^4.0.2",
-		"@sapphire/plugin-hmr": "^3.0.1",
 		"@sapphire/plugin-i18next": "^7.1.2",
 		"@sapphire/plugin-logger": "^4.0.2",
 		"@sapphire/plugin-scheduled-tasks": "^10.0.1",
@@ -33,21 +38,23 @@
 		"@types/copyfiles": "^2",
 		"@types/node": "^20.11.5",
 		"@types/ws": "^8.5.10",
-		"copyfiles": "^2.4.1",
 		"npm-run-all2": "^6.1.1",
 		"prettier": "^3.2.4",
 		"prisma": "^5.20.0",
+		"tsc-watch": "^6.2.0",
 		"typescript": "~5.4.5"
 	},
 	"scripts": {
 		"sapphire": "sapphire",
 		"generate": "sapphire generate",
-		"copy": "copyfiles -u 1 src/**/*.json dist",
-		"dev": "run-p watch start",
-		"build": "tsc && yarn copy",
-		"watch": "tsc --watch",
+		"dev": "yarn build && yarn start",
+		"build": "tsc -b src",
+		"watch": "tsc -b src -w",
+		"watch:start": "tsc-watch -b src --onSuccess \"yarn start\"",
 		"start": "node dist/index.js",
-		"format": "prettier --write \"src/**/*.ts\""
+		"format": "prettier --write \"src/**/*.ts\"",
+		"prisma:generate": "npx prisma generate",
+		"prisma:migrate": "npx prisma migrate dev"
 	},
 	"prettier": "@sapphire/prettier-config",
 	"packageManager": "yarn@4.5.0"
