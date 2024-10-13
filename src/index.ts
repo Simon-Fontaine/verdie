@@ -1,4 +1,3 @@
-// import './lib/setup';
 import '#lib/setup';
 
 import { container } from '@sapphire/framework';

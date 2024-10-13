@@ -10,6 +10,7 @@ declare module '@sapphire/pieces' {
 declare module '@skyra/env-utilities' {
 	interface Env {
 		OWNERS: ArrayString;
+		CLIENT_COLOR: NumberString;
 
 		API_ENABLED: BooleanString;
 		API_ORIGIN: string;
