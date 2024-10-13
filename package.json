@@ -9,7 +9,8 @@
 		"#root/*": "./dist/*.js",
 		"#lib/*": "./dist/lib/*.js",
 		"#utils/*": "./dist/lib/util/*.js",
-		"#lib/setup": "./dist/lib/setup/index.js"
+		"#lib/setup": "./dist/lib/setup/index.js",
+		"#lib/discord": "./dist/lib/discord/index.js"
 	},
 	"dependencies": {
 		"@prisma/client": "^5.20.0",

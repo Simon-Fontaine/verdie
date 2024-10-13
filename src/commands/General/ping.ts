@@ -1,8 +1,7 @@
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
-import { send } from '@sapphire/plugin-editable-commands';
 import { resolveKey } from '@sapphire/plugin-i18next';
-import { ApplicationCommandType, type Message } from 'discord.js';
+import { ApplicationCommandType } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: "Gives information about Verdie's ping."
@@ -27,16 +26,6 @@ export class UserCommand extends Command {
 			name: this.name,
 			type: ApplicationCommandType.User
 		});
-	}
-
-	// Message command
-	public override async messageRun(message: Message) {
-		const msg = await send(message, 'Ping?');
-
-		const diff = (msg.editedTimestamp || msg.createdTimestamp) - (message.editedTimestamp || message.createdTimestamp);
-		const ping = Math.round(this.container.client.ws.ping);
-
-		return send(message, await resolveKey(message, 'ping:success', { diff, ping }));
 	}
 
 	// slash command

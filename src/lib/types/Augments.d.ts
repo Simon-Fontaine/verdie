@@ -1,5 +1,14 @@
 import type { PrismaClient } from '@prisma/client';
 import type { ArrayString, BooleanString, IntegerString, NumberString } from '@skyra/env-utilities';
+import { GuildMemberFetchQueue } from '#lib/discord';
+
+declare module 'discord.js' {
+	interface Client {
+		readonly guildMemberFetchQueue: GuildMemberFetchQueue;
+		computeGuilds(): Promise<number>;
+		computeUsers(): Promise<number>;
+	}
+}
 
 declare module '@sapphire/pieces' {
 	interface Container {

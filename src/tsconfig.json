@@ -10,7 +10,8 @@
 			"#root/*": ["*"],
 			"#lib/*": ["lib/*"],
 			"#utils/*": ["utils/*"],
-			"#lib/setup": ["lib/setup/index.js"]
+			"#lib/setup": ["lib/setup/index.js"],
+			"#lib/discord": ["lib/discord/index.js"]
 		}
 	},
 	"include": [".", "./**/*.json"],
