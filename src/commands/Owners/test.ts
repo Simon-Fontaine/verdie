@@ -2,7 +2,7 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 
 @ApplyOptions<Command.Options>({
-	description: 'A testing command.',
+	description: 'A Owner Only testing command.',
 	preconditions: ['OwnerOnly']
 })
 export class UserCommand extends Command {
