@@ -6,6 +6,10 @@
 > [!NOTE]
 > The complete documentation and additional details will be available in this README.md once the first official version has been released. Thank you for your understanding and interest in Verdie!
 
+# Acknowledgements
+
+The base of the bot handler is highly inspired by the work of [BirthdayyBot](https://github.com/BirthdayyBot/BirthdayyBot).
+
 ## Commit Messages
 
 Use clear and descriptive commit messages with the following prefixes:
