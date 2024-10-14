@@ -56,8 +56,8 @@
 		"watch:start": "tsc-watch -b src --onSuccess \"yarn start\"",
 		"start": "doppler run -- node --enable-source-maps dist/index.js",
 		"format": "prettier --write \"src/**/*.ts\"",
-		"prisma:generate": "npx prisma generate",
-		"prisma:migrate": "npx prisma migrate dev"
+		"prisma:generate": "doppler run -- npx prisma generate",
+		"prisma:migrate": "doppler run -- npx prisma migrate dev"
 	},
 	"prettier": "@sapphire/prettier-config",
 	"packageManager": "yarn@4.5.0"

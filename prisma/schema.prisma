@@ -15,7 +15,7 @@ datasource db {
 
 model Guild {
     id                  String     @id @db.VarChar(19)
-    name                String     @db.VarChar(100)
+    name                String     @db.VarChar(100) @default("")
     timezone            String     @default("UTC")
     language            String     @default("en-US") @db.VarChar(5)
     createdAt           DateTime   @default(now()) @map("created_at")
