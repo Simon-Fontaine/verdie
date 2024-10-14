@@ -49,6 +49,8 @@
 		"sapphire": "sapphire",
 		"generate": "sapphire generate",
 		"dev": "yarn build && yarn start",
+		"compose:up": "doppler run -- docker-compose up",
+		"compose:down": "doppler run -- docker-compose down",
 		"build": "tsc -b src",
 		"watch": "tsc -b src -w",
 		"watch:start": "tsc-watch -b src --onSuccess \"yarn start\"",

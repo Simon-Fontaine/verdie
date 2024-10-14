@@ -4,11 +4,11 @@ import { GatewayDispatchEvents, type GatewayGuildCreateDispatch } from 'discord.
 
 @ApplyOptions<Listener.Options>({ event: GatewayDispatchEvents.GuildCreate, emitter: 'ws' })
 export class UserListener extends Listener {
-	public async run({ id }: GatewayGuildCreateDispatch['d'], _shardId: number) {
+	public override run({ id }: GatewayGuildCreateDispatch['d']) {
 		return this.container.prisma.guild.upsert({
-			update: {},
+			where: { id },
 			create: { id },
-			where: { id }
+			update: {}
 		});
 	}
 }
